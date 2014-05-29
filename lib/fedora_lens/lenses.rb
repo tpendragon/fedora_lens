@@ -50,7 +50,7 @@ module FedoraLens
       def uris_to_ids
         Lens[
           get: lambda do |source|
-            source.map { |uri| URI.parse(uri).to_s.sub(HOST, '') }
+            source.map { |uri| URI.parse(uri).to_s.sub(FedoraLens.connection.http.url_prefix.to_s, '') }
           end,
           put: lambda do |sources, values|
             Array(values).compact.map do |value|
